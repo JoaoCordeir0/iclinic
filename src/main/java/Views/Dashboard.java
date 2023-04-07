@@ -30,7 +30,6 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jButtonCadTurno = new javax.swing.JButton();
         jButtonCadFuncionario = new javax.swing.JButton();
-        jButtonEditaTurnos = new javax.swing.JButton();
         jButtonListaTurnos = new javax.swing.JButton();
         jLabelTurnosHoje = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -52,24 +51,24 @@ public class Dashboard extends javax.swing.JFrame {
         jButtonCadTurno.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButtonCadTurno.setForeground(new java.awt.Color(102, 102, 102));
         jButtonCadTurno.setText("Cadastrar turno > ");
+        jButtonCadTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadTurnoActionPerformed(evt);
+            }
+        });
 
         jButtonCadFuncionario.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButtonCadFuncionario.setForeground(new java.awt.Color(102, 102, 102));
         jButtonCadFuncionario.setText("Cadastrar Funcionario > ");
 
-        jButtonEditaTurnos.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
-        jButtonEditaTurnos.setForeground(new java.awt.Color(102, 102, 102));
-        jButtonEditaTurnos.setText("Edita turnos > ");
-        jButtonEditaTurnos.setActionCommand("Cadastrar Listar > ");
-        jButtonEditaTurnos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditaTurnosActionPerformed(evt);
-            }
-        });
-
         jButtonListaTurnos.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButtonListaTurnos.setForeground(new java.awt.Color(102, 102, 102));
         jButtonListaTurnos.setText("Listar turnos > ");
+        jButtonListaTurnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListaTurnosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -85,7 +84,6 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jButtonCadTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonCadFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonEditaTurnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonListaTurnos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
@@ -98,8 +96,6 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jButtonCadFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonCadTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonEditaTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButtonListaTurnos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -149,9 +145,13 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEditaTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditaTurnosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditaTurnosActionPerformed
+    private void jButtonListaTurnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListaTurnosActionPerformed
+        (new ListaTurnos()).setVisible(true);
+    }//GEN-LAST:event_jButtonListaTurnosActionPerformed
+
+    private void jButtonCadTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadTurnoActionPerformed
+        (new CadastraTurnos()).setVisible(true);
+    }//GEN-LAST:event_jButtonCadTurnoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,7 +191,6 @@ public class Dashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadFuncionario;
     private javax.swing.JButton jButtonCadTurno;
-    private javax.swing.JButton jButtonEditaTurnos;
     private javax.swing.JButton jButtonListaTurnos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelTurnosHoje;

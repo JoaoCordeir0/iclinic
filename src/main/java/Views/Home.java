@@ -105,6 +105,7 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        this.dispose();
         (new Dashboard()).setVisible(true);        
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
