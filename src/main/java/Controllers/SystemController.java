@@ -1,9 +1,15 @@
 package Controllers;
+import Models.SystemModel;
 
 /**
  *
- * @author joaoc
+ * @author Cordeiro
  */
-public class Controller {
+public class SystemController {
     
+    // Retorna o dia e mês atual da model 
+    public static String showDate()
+    {
+        return SystemModel.getDateTime();
+    }
 }
