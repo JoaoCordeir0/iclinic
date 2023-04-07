@@ -1,7 +1,10 @@
 package Models;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -15,5 +18,14 @@ public class SystemModel {
         
         return dtf.format(LocalDateTime.now());
     }
+    
+    // Função que formata as datas
+    public static Date formatDate(String data) throws ParseException
+    {        
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+        Date newData = formato.parse("23/11/2015");
+        
+        return newData;
+    } 
     
 }

@@ -30,7 +30,7 @@ public class Database {
 
         connection = DriverManager.getConnection(url, username, password);
 
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Class.forName("com.mysql.jdbc.Driver");
 
         //Testa a conexão com o banco
         if (connection != null) {

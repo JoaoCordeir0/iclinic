@@ -9,9 +9,7 @@ create table funcionario(
 );
 
 create table turnos(
-	idTurno int primary key auto_increment,
-    dataInicio date,
-    dataFim date,
+	idTurno int primary key auto_increment,  
     tipoTurno varchar(255),
     codFuncionario int,
     dataInsercao date default now(),

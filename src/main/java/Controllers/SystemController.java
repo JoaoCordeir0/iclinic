@@ -1,5 +1,7 @@
 package Controllers;
 import Models.SystemModel;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  *
@@ -11,5 +13,11 @@ public class SystemController {
     public static String showDate()
     {
         return SystemModel.getDateTime();
+    }
+    
+    // Formata a data que será inserida no banco de dados
+    public static Date formatDate(String data) throws ParseException
+    {
+        return SystemModel.formatDate(data);
     }
 }
