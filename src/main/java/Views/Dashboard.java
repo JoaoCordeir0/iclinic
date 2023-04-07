@@ -60,6 +60,11 @@ public class Dashboard extends javax.swing.JFrame {
         jButtonCadFuncionario.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButtonCadFuncionario.setForeground(new java.awt.Color(102, 102, 102));
         jButtonCadFuncionario.setText("Cadastrar Funcionario > ");
+        jButtonCadFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCadFuncionarioActionPerformed(evt);
+            }
+        });
 
         jButtonListaTurnos.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 12)); // NOI18N
         jButtonListaTurnos.setForeground(new java.awt.Color(102, 102, 102));
@@ -152,6 +157,10 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButtonCadTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadTurnoActionPerformed
         (new CadastraTurnos()).setVisible(true);
     }//GEN-LAST:event_jButtonCadTurnoActionPerformed
+
+    private void jButtonCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadFuncionarioActionPerformed
+        (new CadastraFuncionarios()).setVisible(true);
+    }//GEN-LAST:event_jButtonCadFuncionarioActionPerformed
 
     /**
      * @param args the command line arguments
