@@ -2,18 +2,18 @@ create database iclinic;
 use iclinic;
 
 create table funcionario(	
-    codFuncionario int primary key,
+    idFuncionario int primary key auto_increment,
+	codFuncionario varchar(50),
     nomeFuncionario varchar(255),	
     nomeCargo varchar(255),
     dataInsercao date default now()
 );
 
 create table turnos(
-    idTurno int primary key auto_increment,  
+	idTurno int primary key auto_increment,
+    diaTurno date,
     tipoTurno varchar(255),
-    codFuncionario int,
+    idFuncionario int,
     dataInsercao date default now(),
-    foreign key (codFuncionario) references funcionario (codFuncionario)
+    foreign key (idFuncionario) references funcionario (idFuncionario)
 );
-
-

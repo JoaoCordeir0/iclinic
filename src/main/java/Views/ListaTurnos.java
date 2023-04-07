@@ -1,12 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Views;
+import Controllers.TurnosController;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
- * @author joaoc
+ * @author Cordeiro
  */
 public class ListaTurnos extends javax.swing.JFrame {
 
@@ -14,7 +15,13 @@ public class ListaTurnos extends javax.swing.JFrame {
      * Creates new form ListaTurnos
      */
     public ListaTurnos() {
-        initComponents();
+        try {
+            initComponents();
+            
+            TurnosController.listaTurnos(jTableTurnos);
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | ParseException ex) {
+            Logger.getLogger(ListaTurnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -27,25 +34,29 @@ public class ListaTurnos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableTurnos = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         JLabelListagemTurnos = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1015, 545));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome Funcionario", "Data Início", "Data Fim", "Tipo de turno", "Editar", "Excluir"
+                "Código Funcionario", "Nome Funcionario", "Data do turno", "Hora Início", "Hora Fim", "Tipo de turno"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jTableTurnos.setMaximumSize(new java.awt.Dimension(200000000, 20));
+        jScrollPane1.setViewportView(jTableTurnos);
 
         jButton1.setText("< Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -58,19 +69,31 @@ public class ListaTurnos extends javax.swing.JFrame {
         JLabelListagemTurnos.setForeground(new java.awt.Color(102, 102, 102));
         JLabelListagemTurnos.setText("Listagem de turnos > ");
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(51, 51, 255));
+        jButton2.setText("Editar");
+
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 0, 51));
+        jButton3.setText("Excluir");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 943, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JLabelListagemTurnos))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 956, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(JLabelListagemTurnos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton3)))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -78,10 +101,12 @@ public class ListaTurnos extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(JLabelListagemTurnos))
+                    .addComponent(JLabelListagemTurnos)
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,7 +155,9 @@ public class ListaTurnos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabelListagemTurnos;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableTurnos;
     // End of variables declaration//GEN-END:variables
 }

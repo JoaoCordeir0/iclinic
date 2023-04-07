@@ -1,5 +1,12 @@
 package Views;
 
+import Controllers.FuncionarioController;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Cordeiro
@@ -27,10 +34,10 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jComboBoxFuncionario = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jButtonSalvarCadTurno = new javax.swing.JButton();
+        jLabelTipoCodigo = new javax.swing.JLabel();
         jTextNome = new javax.swing.JTextField();
         jTextCodigo = new javax.swing.JTextField();
+        jButtonSalvarCadFunc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -49,13 +56,23 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
 
         jLabel2.setText("Cargo:");
 
-        jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enfermeiro", "Residente", "Médico" }));
+        jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o cargo", "Enfermeiro", "Residente", "Médico" }));
+        jComboBoxFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFuncionarioActionPerformed(evt);
+            }
+        });
 
-        jLabel3.setText("Código:");
+        jLabelTipoCodigo.setText("... :");
 
-        jButtonSalvarCadTurno.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButtonSalvarCadTurno.setForeground(new java.awt.Color(102, 102, 102));
-        jButtonSalvarCadTurno.setText("Salvar");
+        jButtonSalvarCadFunc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonSalvarCadFunc.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonSalvarCadFunc.setText("Salvar");
+        jButtonSalvarCadFunc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSalvarCadFuncActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,10 +81,10 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButtonSalvarCadTurno)
+                    .addComponent(jButtonSalvarCadFunc)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabelTipoCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -96,10 +113,10 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
                     .addComponent(jComboBoxFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelTipoCodigo)
                     .addComponent(jTextCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonSalvarCadTurno)
+                .addComponent(jButtonSalvarCadFunc)
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
@@ -111,6 +128,56 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButtonSalvarCadFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarCadFuncActionPerformed
+
+        if (jTextNome.getText().equals("") || jTextCodigo.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(rootPane,"Preencha todos os campos!");
+        }
+        else 
+        {                    
+            try {
+                FuncionarioController.CadastrarFuncionario(
+                        jTextNome.getText(),
+                        jComboBoxFuncionario.getSelectedItem().toString(),
+                        jTextCodigo.getText()
+                );
+
+                JOptionPane.showMessageDialog(rootPane,"Funcionario inserido com sucesso!");
+
+                jTextNome.setText("");
+                jComboBoxFuncionario.setSelectedIndex(1);
+                jTextCodigo.setText("");
+
+            } catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
+                JOptionPane.showMessageDialog(rootPane,"Não foi possível inserir o funcionario!");
+                Logger.getLogger(CadastraFuncionarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_jButtonSalvarCadFuncActionPerformed
+
+    private void jComboBoxFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+        
+        String selecionado = jComboBoxFuncionario.getSelectedItem().toString();
+        
+        switch(selecionado)
+        {
+            case "Enfermeiro":
+                jLabelTipoCodigo.setText("COREN: ");
+                break;
+            case "Médico": 
+                jLabelTipoCodigo.setText("CRM: ");
+                break;    
+            case  "Residente":
+                jLabelTipoCodigo.setText("CRM: ");
+                break;
+            case "Selecione o cargo":
+                jLabelTipoCodigo.setText("... :");
+                break;
+        }        
+    }
+   
     /**
      * @param args the command line arguments
      */
@@ -152,11 +219,11 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLabelListagemTurnos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonSalvarCadTurno;
+    private javax.swing.JButton jButtonSalvarCadFunc;
     private javax.swing.JComboBox<String> jComboBoxFuncionario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelTipoCodigo;
     private javax.swing.JTextField jTextCodigo;
     private javax.swing.JTextField jTextNome;
     // End of variables declaration//GEN-END:variables

@@ -12,7 +12,7 @@ public class Dashboard extends javax.swing.JFrame {
      */
     public Dashboard() {
         initComponents();
-        jLabelTurnosHoje.setText("Turnos de hoje " + SystemController.showDate() + " >");
+        jLabelTurnosHoje.setText("Turnos de hoje " + SystemController.getDataAtual() + " >");
     }
 
     /**

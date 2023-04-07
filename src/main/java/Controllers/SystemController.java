@@ -10,14 +10,20 @@ import java.util.Date;
 public class SystemController {
     
     // Retorna o dia e mês atual da model 
-    public static String showDate()
+    public static String getDataAtual()
     {
         return SystemModel.getDateTime();
     }
     
     // Formata a data que será inserida no banco de dados
-    public static String formatDate(String data) throws ParseException
+    public static String formatDateDB(String data) throws ParseException
     {
-        return SystemModel.formatDate(data);
+        return SystemModel.formatDateDB(data);
+    }
+    
+    // Formata a data que será exibida para o usuário
+    public static String formatDateUser(String data) throws ParseException
+    {
+        return SystemModel.formatDateUser(data);
     }
 }
