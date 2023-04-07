@@ -12,10 +12,10 @@ import java.util.Date;
 public class TurnosModel {
     
     String nome;
-    Date data;
+    String data;
     String tipoTurno;
     
-    public TurnosModel(String nome, Date data, String tipoTurno)
+    public TurnosModel(String nome, String data, String tipoTurno)
     {
         this.nome = nome;
         this.data = data;
@@ -32,7 +32,7 @@ public class TurnosModel {
         PreparedStatement comandoSQL = conn.prepareStatement(sql);
 
         // Injeta os valores que devem compor o SQL
-        comandoSQL.setString(1, this.data.toInstant());
+        comandoSQL.setString(1, this.data);
         comandoSQL.setString(2, this.tipoTurno);
         comandoSQL.setInt(3, 1);
 

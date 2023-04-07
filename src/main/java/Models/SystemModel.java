@@ -20,12 +20,17 @@ public class SystemModel {
     }
     
     // Função que formata as datas
-    public static Date formatDate(String data) throws ParseException
-    {        
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-        Date newData = formato.parse("23/11/2015");
+    public static String formatDate(String data) throws ParseException
+    {   
+        // Seta antigo formato de data
+        SimpleDateFormat in= new SimpleDateFormat("dd/MM/yyyy");
+        
+        // Seta novo formato de data
+        SimpleDateFormat out = new SimpleDateFormat("yyyy-MM-dd");
+                    
+        // Formata a data no novo jeito, dando um parse no antigo
+        String newData = out.format(in.parse(data));
         
         return newData;
-    } 
-    
+    }  
 }

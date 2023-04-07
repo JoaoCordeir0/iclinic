@@ -3,6 +3,9 @@ package Views;
 import Controllers.TurnosController;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -131,17 +134,18 @@ public class CadastraTurnos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSalvarCadTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarCadTurnoActionPerformed
-
-        try {
+ 
+        try 
+        {             
             // Envia as informações para o controller
-            TurnosController.cadastraTurno(
-                    jTextDiaTurno.getText(),
-                    jComboBoxFuncionario.getSelectedItem().toString(),
-                    jComboBoxTipoTurno.getSelectedItem().toString()
-            );
-        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | ParseException ex) {
+            TurnosController.cadastraTurno(jTextDiaTurno.getText(),
+                                           jComboBoxFuncionario.getSelectedItem().toString(),
+                                       jComboBoxTipoTurno.getSelectedItem().toString());    
+        } 
+        catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | ParseException ex) 
+        {
             Logger.getLogger(CadastraTurnos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   
     }//GEN-LAST:event_jButtonSalvarCadTurnoActionPerformed
 
     /**

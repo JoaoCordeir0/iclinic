@@ -16,7 +16,7 @@ public class SystemController {
     }
     
     // Formata a data que será inserida no banco de dados
-    public static Date formatDate(String data) throws ParseException
+    public static String formatDate(String data) throws ParseException
     {
         return SystemModel.formatDate(data);
     }
