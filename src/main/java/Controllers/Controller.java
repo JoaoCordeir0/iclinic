@@ -1,9 +1,9 @@
-package Controlers;
+package Controllers;
 
 /**
  *
  * @author joaoc
  */
-public class Controler {
+public class Controller {
     
 }
