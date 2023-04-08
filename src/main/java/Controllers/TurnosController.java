@@ -28,7 +28,7 @@ public class TurnosController {
         // Resultset usado para contar a quantidade de resultados obtidos
         ResultSet rsCount = TurnosModel.getTurnos();                        
         
-        int size = 9;
+        int size = 0;
         int c = 0;        
         
         while(rsCount.next())
@@ -38,7 +38,7 @@ public class TurnosController {
                 
         DefaultTableModel tbl = (DefaultTableModel) Itable.getModel();
         
-        tbl.setRowCount(9);
+        tbl.setRowCount(size);
         Itable.setModel(tbl);               
         
         // Percorre e adiciona os valores na tabela

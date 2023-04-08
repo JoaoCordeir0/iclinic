@@ -4,6 +4,7 @@ import Core.Database;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -45,6 +46,18 @@ public class FuncionarioModel {
         conn.close();
         
         return true;
+    }
+      
+    // Função responsável por retornar a listagem de funcionario inseridos no banco de dados
+    public static ResultSet getFuncionario () throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+        Connection conn = Database.createConexao();
+        
+        String sql = "SELECT idFuncionario, nomeFuncionario FROM funcionario;";
+        
+        ResultSet rs = Database.execSelect(conn, sql);
+        
+        return rs;
     }
     
 }

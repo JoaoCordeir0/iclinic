@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.FuncionarioController;
 import Controllers.TurnosController;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -18,6 +19,12 @@ public class CadastraTurnos extends javax.swing.JFrame {
      */
     public CadastraTurnos() {
         initComponents();
+        
+        try {
+            FuncionarioController.listarFuncionarios(jComboBoxFuncionario);
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(CadastraTurnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -62,7 +69,7 @@ public class CadastraTurnos extends javax.swing.JFrame {
 
         jLabel2.setText("Funcionario:");
 
-        jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1- João Victor", "2- Lucas", "3- Henrique" }));
+        jComboBoxFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione o funcionario:" }));
 
         jLabel3.setText("Tipo de turno:");
 
