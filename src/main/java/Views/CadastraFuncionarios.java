@@ -40,6 +40,7 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
         jButtonSalvarCadFunc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Iclinic - Cadastro de funcionarios");
 
         jButton1.setText("< Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

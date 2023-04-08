@@ -47,6 +47,7 @@ public class CadastraTurnos extends javax.swing.JFrame {
         jButtonSalvarCadTurno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Iclinic - Cadastro de turnos");
 
         jButton1.setText("< Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

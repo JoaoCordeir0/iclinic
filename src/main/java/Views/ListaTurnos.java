@@ -41,6 +41,7 @@ public class ListaTurnos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Iclinic - Listagem de turnos");
 
         jTableTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

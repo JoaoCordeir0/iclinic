@@ -47,7 +47,7 @@ public class Home extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Iclinc");
+        setTitle("Iclinic - Home");
         setBackground(new java.awt.Color(102, 153, 255));
 
         jPanel1.setBackground(new java.awt.Color(102, 153, 255));
