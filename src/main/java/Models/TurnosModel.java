@@ -11,17 +11,24 @@ import java.sql.SQLException;
  */
 public class TurnosModel {
         
+    int idTurno;
     String diaTurno;
     String tipoTurno;
     int idFuncionario;
     
-    public TurnosModel(String diaTurno, String tipoTurno, int idFuncionario)
+    public TurnosModel(int idTurno, String diaTurno, String tipoTurno, int idFuncionario)
     {
+        this.idTurno = idTurno;
         this.diaTurno = diaTurno;
         this.tipoTurno = tipoTurno;
         this.idFuncionario = idFuncionario;
     }       
-    
+
+    // Gests
+    public int getIdTurno() {
+        return idTurno;
+    }
+
     public String getDiaTurno() {
         return diaTurno;
     }
@@ -34,6 +41,11 @@ public class TurnosModel {
         return idFuncionario;
     }
 
+    // Sets
+    public void setIdTurno(int idTurno) {
+        this.idTurno = idTurno;
+    }
+
     public void setDiaTurno(String diaTurno) {
         this.diaTurno = diaTurno;
     }
@@ -44,7 +56,7 @@ public class TurnosModel {
 
     public void setIdFuncionario(int idFuncionario) {
         this.idFuncionario = idFuncionario;
-    }
+    }         
     
     // Função responsável por inserir no banco de dados o novo turno
     public boolean insertTurno() throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException
@@ -116,5 +128,39 @@ public class TurnosModel {
         }
         
         return achou;
+    }
+    
+    // Função responsável por excluir um turno
+    public boolean excluiTurno() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+        Connection conn = Database.createConexao();
+        
+        String sql = "DELETE FROM turnos WHERE idTurno = ?";                                
+        
+        // Preparar a sintaxe básica do sql a ser executado
+        PreparedStatement comandoSQL = conn.prepareStatement(sql);
+
+        // Injeta os valores que devem compor o SQL
+        comandoSQL.setInt(1, getIdTurno());
+
+        // Executar o comando no mysql
+        comandoSQL.executeUpdate();
+
+        // Fecha os recursos
+        comandoSQL.close();
+        conn.close();
+       
+        return true;
+    }
+    
+    public static ResultSet getInformacoesTurno(int idTurno) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+        Connection conn = Database.createConexao();
+        
+        String sql = "SELECT diaTurno, nomeFuncionario, tipoTurno FROM turnos as t INNER JOIN funcionario as f ON t.idFuncionario = f.idFuncionario WHERE idTurno = " + idTurno;
+        
+        ResultSet rs = Database.execSelect(conn, sql);
+                       
+        return rs;
     }
 }

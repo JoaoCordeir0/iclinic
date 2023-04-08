@@ -105,7 +105,7 @@ public class CadastraTurnos extends javax.swing.JFrame {
                             .addComponent(jTextDiaTurno)
                             .addComponent(jComboBoxFuncionario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jComboBoxTipoTurno, 0, 203, Short.MAX_VALUE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

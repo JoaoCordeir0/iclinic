@@ -22,7 +22,7 @@ public class Dashboard extends javax.swing.JFrame {
             jLabelTurnosHoje.setText("Turnos de hoje " + SystemController.getDataAtual() + " >");
             
             // Preenche a tabela com os turnos do dia atual
-            TurnosController.listaTurnosHoje(jTableTurnosDiaAtual);
+            TurnosController.listaTurnos(jTableTurnosDiaAtual, "diaAtual");
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | ParseException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -127,18 +127,18 @@ public class Dashboard extends javax.swing.JFrame {
 
         jTableTurnosDiaAtual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código Funcionario", "Nome Funcionario", "Data do turno", "Hora início", "Hora fim", "Tipo de turno"
+                "ID Turno", "Código Funcionario", "Nome Funcionario", "Cargo", "Data do turno", "Horário", "Tipo de turno"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                true, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -203,7 +203,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButtonRecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecarregarActionPerformed
         // Recarrega e preenche a tabela com os turnos do dia atual
         try {
-            TurnosController.listaTurnosHoje(jTableTurnosDiaAtual);
+            TurnosController.listaTurnos(jTableTurnosDiaAtual, "diaAtual");
         } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | ParseException ex) {
             Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
         }

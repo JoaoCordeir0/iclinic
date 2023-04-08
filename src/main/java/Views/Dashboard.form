@@ -205,12 +205,13 @@
         <Component class="javax.swing.JTable" name="jTableTurnosDiaAtual">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="5">
+              <Table columnCount="7" rowCount="5">
+                <Column editable="true" title="ID Turno" type="java.lang.Object"/>
                 <Column editable="false" title="C&#xf3;digo Funcionario" type="java.lang.Object"/>
                 <Column editable="false" title="Nome Funcionario" type="java.lang.Object"/>
+                <Column editable="false" title="Cargo" type="java.lang.Object"/>
                 <Column editable="false" title="Data do turno" type="java.lang.Object"/>
-                <Column editable="false" title="Hora in&#xed;cio" type="java.lang.Object"/>
-                <Column editable="false" title="Hora fim" type="java.lang.Object"/>
+                <Column editable="false" title="Hor&#xe1;rio" type="java.lang.Object"/>
                 <Column editable="false" title="Tipo de turno" type="java.lang.Object"/>
               </Table>
             </Property>
