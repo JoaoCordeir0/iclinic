@@ -140,26 +140,37 @@ public class CadastraTurnos extends javax.swing.JFrame {
 
     private void jButtonSalvarCadTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarCadTurnoActionPerformed
 
-        String funcionario = jComboBoxFuncionario.getSelectedItem().toString();
+        if (jTextDiaTurno.getText().replace(" ", "").length() > 2)
+        {
+            String funcionario = jComboBoxFuncionario.getSelectedItem().toString();
+            
+            if (!funcionario.equals("Selecione o funcionario:"))
+            {                     
+                String[] retornoSplit = funcionario.split("-");
+                try {
+                    // Envia as informações para o controller
+                    TurnosController.cadastraTurno(
+                            jTextDiaTurno.getText(),
+                            jComboBoxTipoTurno.getSelectedItem().toString(),
+                            Integer.parseInt(retornoSplit[0])
+                    );            
 
-        String[] retornoSplit = funcionario.split("-");
-
-        try {
-            // Envia as informações para o controller
-            TurnosController.cadastraTurno(
-                    jTextDiaTurno.getText(),
-                    jComboBoxTipoTurno.getSelectedItem().toString(),
-                    Integer.parseInt(retornoSplit[0])
-            );
-
-            JOptionPane.showMessageDialog(rootPane, "Turno inserido com sucesso!");
-
-            jTextDiaTurno.setText("");
-            jComboBoxTipoTurno.setSelectedIndex(1);
-            jComboBoxFuncionario.setSelectedIndex(1);
-        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | ParseException ex) {
-            JOptionPane.showMessageDialog(rootPane, "Erro ao inserir o turno!");
-            Logger.getLogger(CadastraTurnos.class.getName()).log(Level.SEVERE, null, ex);
+                    jTextDiaTurno.setText("");
+                    jComboBoxTipoTurno.setSelectedIndex(0);
+                    jComboBoxFuncionario.setSelectedIndex(0);
+                } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | ParseException ex) {
+                    JOptionPane.showMessageDialog(rootPane, "Erro ao inserir o turno!");
+                    Logger.getLogger(CadastraTurnos.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            else 
+            {
+                JOptionPane.showMessageDialog(rootPane, "Escolha o funcionario!");
+            }
+        }
+        else 
+        {
+            JOptionPane.showMessageDialog(rootPane, "Preencha a data corretamente!");
         }
     }//GEN-LAST:event_jButtonSalvarCadTurnoActionPerformed
 

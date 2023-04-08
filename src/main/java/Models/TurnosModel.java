@@ -72,14 +72,49 @@ public class TurnosModel {
     }          
     
     // Função responsável por retornar a listagem de turnos inseridos no banco de dados
-    public static ResultSet getTurnos() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    public static ResultSet getTurnos(String option) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
     {
+        String sql = "";
         Connection conn = Database.createConexao();
         
-        String sql = "SELECT DISTINCT(t.idTurno), f.idFuncionario, f.codFuncionario, f.nomeFuncionario, f.nomeCargo, t.tipoTurno, t.diaTurno FROM turnos as t INNER JOIN funcionario as f ON t.idFuncionario = f.idFuncionario";
-        
+        switch(option.toString())
+        {
+            case "todos":
+                sql = "SELECT DISTINCT(t.idTurno), f.idFuncionario, f.codFuncionario, f.nomeFuncionario, f.nomeCargo, t.tipoTurno, t.diaTurno FROM turnos as t INNER JOIN funcionario as f ON t.idFuncionario = f.idFuncionario";
+                break;
+                
+            case "diaAtual":
+                sql = "SELECT DISTINCT(t.idTurno), f.idFuncionario, f.codFuncionario, f.nomeFuncionario, f.nomeCargo, t.tipoTurno, t.diaTurno FROM turnos as t INNER JOIN funcionario as f ON t.idFuncionario = f.idFuncionario WHERE t.diaTurno = curdate()";
+                break;
+        }
+                
         ResultSet rs = Database.execSelect(conn, sql);
             
         return rs;
     }    
+    
+    // Função responsável por validar se o funcionario pode agendar um novo turno utilizando a regra 12/36
+    public boolean validaTurno() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {       
+        boolean achou = false;
+        int index = 0;
+        
+        Connection conn = Database.createConexao();
+        
+        String sql = "SELECT diaTurno FROM turnos WHERE idFuncionario = " + getIdFuncionario() + " and DATEDIFF('" + getDiaTurno() + "', diaTurno) < 2";
+        
+        ResultSet rs = Database.execSelect(conn, sql);
+        
+        while(rs.next())
+        {
+            index += 1;
+        }
+        
+        if (index > 0)
+        {
+            achou = true;
+        }
+        
+        return achou;
+    }
 }

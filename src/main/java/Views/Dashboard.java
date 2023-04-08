@@ -1,5 +1,10 @@
 package Views;
 import Controllers.SystemController;
+import Controllers.TurnosController;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -11,8 +16,16 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dashboard
      */
     public Dashboard() {
-        initComponents();
-        jLabelTurnosHoje.setText("Turnos de hoje " + SystemController.getDataAtual() + " >");
+        try {
+            initComponents();
+            // Adiciona o dia atual na dashboard
+            jLabelTurnosHoje.setText("Turnos de hoje " + SystemController.getDataAtual() + " >");
+            
+            // Preenche a tabela com os turnos do dia atual
+            TurnosController.listaTurnosHoje(jTableTurnosDiaAtual);
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | ParseException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -33,7 +46,8 @@ public class Dashboard extends javax.swing.JFrame {
         jButtonListaTurnos = new javax.swing.JButton();
         jLabelTurnosHoje = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableTurnosDiaAtual = new javax.swing.JTable();
+        jButtonRecarregar = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -110,18 +124,36 @@ public class Dashboard extends javax.swing.JFrame {
         jLabelTurnosHoje.setForeground(new java.awt.Color(102, 102, 102));
         jLabelTurnosHoje.setText("Turnos de hoje ... >");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableTurnosDiaAtual.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código Funcionario", "Nome Funcionario", "Data do turno", "Hora início", "Hora fim", "Tipo de turno"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableTurnosDiaAtual);
+
+        jButtonRecarregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonRecarregar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonRecarregar.setText("Recarregar");
+        jButtonRecarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRecarregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,8 +162,11 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTurnosHoje)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelTurnosHoje)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRecarregar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -139,8 +174,10 @@ public class Dashboard extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabelTurnosHoje)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelTurnosHoje)
+                    .addComponent(jButtonRecarregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -161,6 +198,15 @@ public class Dashboard extends javax.swing.JFrame {
     private void jButtonCadFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadFuncionarioActionPerformed
         (new CadastraFuncionarios()).setVisible(true);
     }//GEN-LAST:event_jButtonCadFuncionarioActionPerformed
+
+    private void jButtonRecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecarregarActionPerformed
+        // Recarrega e preenche a tabela com os turnos do dia atual
+        try {
+            TurnosController.listaTurnosHoje(jTableTurnosDiaAtual);
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | ParseException ex) {
+            Logger.getLogger(Dashboard.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonRecarregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,12 +247,13 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton jButtonCadFuncionario;
     private javax.swing.JButton jButtonCadTurno;
     private javax.swing.JButton jButtonListaTurnos;
+    private javax.swing.JButton jButtonRecarregar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelTurnosHoje;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableTurnosDiaAtual;
     // End of variables declaration//GEN-END:variables
 }

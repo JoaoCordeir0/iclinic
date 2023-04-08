@@ -41,7 +41,6 @@ public class ListaTurnos extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1015, 545));
 
         jTableTurnos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -54,7 +53,15 @@ public class ListaTurnos extends javax.swing.JFrame {
             new String [] {
                 "Código Funcionario", "Nome Funcionario", "Data do turno", "Hora Início", "Hora Fim", "Tipo de turno"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableTurnos.setMaximumSize(new java.awt.Dimension(200000000, 20));
         jScrollPane1.setViewportView(jTableTurnos);
 

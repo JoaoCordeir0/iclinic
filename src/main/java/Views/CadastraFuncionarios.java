@@ -141,12 +141,10 @@ public class CadastraFuncionarios extends javax.swing.JFrame {
                         jTextNome.getText(),
                         jComboBoxFuncionario.getSelectedItem().toString(),
                         jTextCodigo.getText()
-                );
-
-                JOptionPane.showMessageDialog(rootPane,"Funcionario inserido com sucesso!");
+                );                
 
                 jTextNome.setText("");
-                jComboBoxFuncionario.setSelectedIndex(1);
+                jComboBoxFuncionario.setSelectedIndex(0);
                 jTextCodigo.setText("");
 
             } catch (IOException | InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException ex) {

@@ -26,7 +26,7 @@ public class Database {
 
         String username = "root"; // usuário do BD
 
-        String password = "123456"; // senha de acesso
+        String password = ""; // senha de acesso
 
         connection = DriverManager.getConnection(url, username, password);
 
@@ -47,12 +47,7 @@ public class Database {
         Statement query = conn.createStatement();
         return query.executeQuery(sql);
     }
-
-    // Responsável por executar inserts e updates no banco de dados 
-    public static java.sql.PreparedStatement prepareSql(Connection conn, String sql) throws SQLException {
-        return conn.prepareStatement(sql);
-    }
-
+    
     // Retorna o status da conexão
     public static String statusConection() {
         return status;

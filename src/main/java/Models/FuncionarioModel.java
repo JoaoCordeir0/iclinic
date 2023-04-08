@@ -17,14 +17,42 @@ public class FuncionarioModel {
     String nome;
     String cargo;
     
+    // Construtor
     public FuncionarioModel(String nome, String cargo, String codigo)
     {
         this.nome = nome;
         this.cargo = cargo;
         this.cod = codigo;
     }
+
+    // Gets
+    public String getCod() {
+        return cod;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    // Sets
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCod(String cod) {
+        this.cod = cod;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }       
     
-      public boolean cadastraFuncionario() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    // Função responsável por cadastrar o funcionario no banco de dados
+    public boolean cadastraFuncionario() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
     {
         Connection conn = Database.createConexao();
         
@@ -58,6 +86,28 @@ public class FuncionarioModel {
         ResultSet rs = Database.execSelect(conn, sql);
         
         return rs;
+    }
+    
+    // Função responsável por validar se o código fornecido pelo usuário não existe no banco, ou seja, não está cadastrado
+    public boolean validaCodigo() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+        boolean achou = false;
+        
+        Connection conn = Database.createConexao();
+        
+        String sql = "SELECT codFuncionario, nomeCargo FROM funcionario;";
+        
+        ResultSet rs = Database.execSelect(conn, sql);
+        
+        while(rs.next())
+        {
+            if (rs.getString("codFuncionario").equals(getCod()) && rs.getString("nomeCargo").equals(getCargo()))
+            {
+                achou = true;
+            }
+        }
+        
+        return achou;
     }
     
 }
