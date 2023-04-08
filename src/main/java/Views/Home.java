@@ -8,28 +8,8 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
-    public Home() {        
-        
-        initComponents();                
-        
-        // Exemplo de utilização do banco de dados
-        //try {
-        //    ResultSet rs = null;            
-        //    Connection conn = null;
-        //    try {                
-        //        conn = Database.createConexao();                                                 
-        //    } catch (IllegalAccessException | ClassNotFoundException | SQLException | InstantiationException ex) {
-        //        Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        //    }
-        //    rs = Database.execSelect(conn, "SELECT * FROM teste");
-        //    
-        //    while(rs.next())
-        //    {
-        //        System.out.println("-> " + rs.getString("nome"));
-        //    }            
-        //} catch (SQLException ex) {
-        //    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
-        //} 
+    public Home() {                
+        initComponents();                               
     }
 
     /**

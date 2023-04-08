@@ -26,7 +26,7 @@ public class Database {
 
         String username = "root"; // usuário do BD
 
-        String password = "123456"; // senha de acesso
+        String password = ""; // senha de acesso
 
         connection = DriverManager.getConnection(url, username, password);
 
