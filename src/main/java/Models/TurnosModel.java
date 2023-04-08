@@ -157,10 +157,34 @@ public class TurnosModel {
     {
         Connection conn = Database.createConexao();
         
-        String sql = "SELECT diaTurno, nomeFuncionario, tipoTurno FROM turnos as t INNER JOIN funcionario as f ON t.idFuncionario = f.idFuncionario WHERE idTurno = " + idTurno;
+        String sql = "SELECT diaTurno, nomeFuncionario, tipoTurno, f.idFuncionario FROM turnos as t INNER JOIN funcionario as f ON t.idFuncionario = f.idFuncionario WHERE idTurno = " + idTurno;
         
         ResultSet rs = Database.execSelect(conn, sql);
                        
         return rs;
+    }
+    
+    public boolean alterarTurno() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException
+    {
+        Connection conn = Database.createConexao();
+        
+        String sql = "UPDATE turnos SET diaTurno = ?, tipoTurno = ? WHERE idTurno = ?;";                                
+        
+        // Preparar a sintaxe básica do sql a ser executado
+        PreparedStatement comandoSQL = conn.prepareStatement(sql);
+
+        // Injeta os valores que devem compor o SQL
+        comandoSQL.setString(1, getDiaTurno());
+        comandoSQL.setString(2, getTipoTurno());
+        comandoSQL.setInt(3, getIdTurno());
+
+        // Executar o comando no mysql
+        comandoSQL.executeUpdate();
+
+        // Fecha os recursos
+        comandoSQL.close();
+        conn.close();
+       
+        return true;
     }
 }

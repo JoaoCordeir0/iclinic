@@ -40,6 +40,7 @@ public class ListaTurnos extends javax.swing.JFrame {
         JLabelListagemTurnos = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButtonRecarregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Iclinic - Listagem de turnos");
@@ -96,6 +97,15 @@ public class ListaTurnos extends javax.swing.JFrame {
             }
         });
 
+        jButtonRecarregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButtonRecarregar.setForeground(new java.awt.Color(102, 102, 102));
+        jButtonRecarregar.setText("Recarregar");
+        jButtonRecarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRecarregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,6 +119,8 @@ public class ListaTurnos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(JLabelListagemTurnos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonRecarregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)))
@@ -122,7 +134,8 @@ public class ListaTurnos extends javax.swing.JFrame {
                     .addComponent(jButton1)
                     .addComponent(JLabelListagemTurnos)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButtonRecarregar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(67, Short.MAX_VALUE))
@@ -155,6 +168,15 @@ public class ListaTurnos extends javax.swing.JFrame {
             (new EditaTurno(idTurno)).setVisible(true);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButtonRecarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRecarregarActionPerformed
+        // Recarrega e preenche a tabela com os turnos alterados
+        try { 
+            TurnosController.listaTurnos(jTableTurnos, "todos");
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException | ParseException ex) {
+            Logger.getLogger(ListaTurnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonRecarregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,6 +218,7 @@ public class ListaTurnos extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButtonRecarregar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableTurnos;
     // End of variables declaration//GEN-END:variables

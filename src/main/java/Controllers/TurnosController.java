@@ -137,8 +137,30 @@ public class TurnosController {
             array[0] = rs.getString("diaTurno");           
             array[1] = rs.getString("nomeFuncionario");
             array[2] = rs.getString("tipoTurno");
+            array[3] = rs.getString("idFuncionario");
         }
         
         return array;
+    }
+    
+    // Função responsável por alterar as informações de um determinado turno 
+    public static boolean alteraTurno(int idTurno, String diaTurno, String tipoTurno, int idFuncionario) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException
+    {
+        TurnosModel turnoModel = new TurnosModel(idTurno, SystemController.formatDateDB(diaTurno), tipoTurno, idFuncionario);
+        
+        if (!turnoModel.validaTurno())
+        {
+            turnoModel.alterarTurno();
+            
+            JOptionPane.showMessageDialog(rootPane,"Turno alterado com sucesso!");
+            
+            return true;
+        }
+        else 
+        {
+            JOptionPane.showMessageDialog(rootPane, "Este funcionario não pode alterar o turno!");
+            
+            return false;
+        }     
     }
 }

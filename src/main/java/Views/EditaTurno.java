@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -153,7 +154,24 @@ public class EditaTurno extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButtonSalvarEditaTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarEditaTurnoActionPerformed
-        
+         try {
+            // Envia as informações para o controller
+            boolean statusTurno = false;
+              
+            statusTurno = TurnosController.alteraTurno(idTurno,
+                                                jTextDiaTurno.getText(),
+                                                jComboBoxTipoTurno.getSelectedItem().toString(),
+                                                Integer.parseInt(TurnosController.getInformacoesTurno(idTurno)[3])
+            );            
+            
+            if(statusTurno)
+                this.dispose();
+        }
+         catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException | ParseException ex) 
+         {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao inserir o turno!");
+            Logger.getLogger(CadastraTurnos.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonSalvarEditaTurnoActionPerformed
 
     /**
